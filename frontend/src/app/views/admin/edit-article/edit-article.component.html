@@ -1,0 +1,58 @@
+<!-- If ok is true, shows article to edit, else shows loading image -->
+<div  *ngIf="ok; else showLoadingGif">
+  <div class="mt-5 mb-5 edit-article align-items-center align-content-center">
+    <div class="row">
+      <form [formGroup]="editArticle" (ngSubmit)="doSaveArticle(editArticle.value)">
+        <div class="col-md-8 mx-auto">
+          <!--Save article-->
+          <button class="mt-3 mb-3" color="primary" [disabled]="wait" mat-flat-button><mat-icon aria-hidden="false" aria-label="Save article">save</mat-icon>Save Article</button>
+          <!--Thumbnail upload-->
+          <div class="mb-1 col-md-6">
+            <input type="file" formControlName="thumbnail" [formControl]="imageFormControl" (change)="fileSelected($event)" accept=".png,.jpg,.jpeg" style="visibility: hidden" #fileUpload />
+            <!--If there's no thumbnail, shows no thumbnail chosen message, else shows the thumbnail-->
+            <div *ngIf="article.thumbnail==null; else showThumbnail">
+              <p>{{ fileName || "No thumbnail chosen"}}</p>
+            </div>
+            <ng-template #showThumbnail>
+              <img width="400px" src="{{article.thumbnail}}" />
+            </ng-template>
+            <button type="button" (click)="fileUpload.click()" class="mt-3 mb-3" color="primary"  mat-flat-button>
+              <mat-icon aria-hidden="false" aria-label="Upload thumbnail">
+                attach_file
+              </mat-icon>
+            Choose file
+            </button>
+            <mat-error *ngIf="imageFormControl.hasError('pattern')">
+              Please upload a valid file (png, jpg or jpeg)
+            </mat-error>
+          </div>
+          <!--Title-->
+          <mat-form-field class="edit-article-input mb-4"  appearance="fill">
+            <mat-label>Title</mat-label>
+            <input type="text" formControlName="title" matInput [formControl]="titleFormControl" [errorStateMatcher]="matcher" [(ngModel)]="article.title" placeholder="Jhon Doe">
+            <mat-hint>Title of your post</mat-hint>
+            <mat-error *ngIf="titleFormControl.hasError('minlength') && !titleFormControl.hasError('required')">
+              Title has to be at least <strong>10 characteres</strong>
+            </mat-error>
+            <mat-error *ngIf="titleFormControl.hasError('required')">
+              Title is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <!--Article Editor-->
+          <app-text-editor (article)="getContent($event)" [textEditorDataEdit]="textEditorDataEdit"></app-text-editor>
+          <mat-error *ngIf="postFormControl.hasError('required')">
+            Article is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="postFormControl.hasError('minlength') && !postFormControl.hasError('required')">
+            Article has to be at least <strong>100 characteres</strong>
+          </mat-error>
+          <!-- Save article -->
+          <button class="mt-3 mb-3" color="primary" [disabled]="wait" mat-flat-button><mat-icon aria-hidden="false" aria-label="Save article">save</mat-icon>Save Article</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<ng-template #showLoadingGif>
+  <mat-spinner class="loading"></mat-spinner>
+</ng-template>

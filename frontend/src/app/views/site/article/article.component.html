@@ -1,0 +1,54 @@
+<div class="container">
+  <div *ngIf="ok; else showLoading">
+    <!--Post author-->
+    <div class="article-information">
+      <mat-icon aria-hidden="false" aria-label="Article author">person</mat-icon>
+      {{article.author.name}}
+      <!--Post date-->
+      <mat-icon aria-hidden="false" aria-label="Article date">calendar_month</mat-icon>
+      Posted on {{article.date | transformDate}} at {{article.date | transformTime}}
+      <!--Likes-->
+      <mat-icon aria-hidden="false" aria-label="Likes">favorite</mat-icon>
+      {{article.likes}}
+      <!--Edit button if user is signed and owner of the article-->
+      <div class="edit-button" *ngIf="signedIn && article.author._id == id">
+        <mat-icon [routerLink]="['/admin/edit-article/', article._id]" aria-hidden="false" aria-label="Edit article">edit</mat-icon>
+      </div>
+    </div>
+    <!--Article title-->
+    <h1>{{article.title}}</h1>
+    <!--Article thumbnail-->
+    <div class="mt-5 mb-5 d-block w-100">
+      <div *ngIf="article.thumbnail != null || article.thumbnail !==''; else noImage">
+          <img class="thumbnail" [src]="article.thumbnail" />
+      </div>
+      <ng-template #noImage>
+        <img mat-card-image class="thumbnail" src="/assets/images/no-photo-available.png" alt="No thumbnail">
+      </ng-template>
+    </div>
+    <!--Article content-->
+    <div class="article" [innerHTML]="article.post" routerTransformer></div>
+    <!--Like button-->
+    <div class="like-button">
+      <div *ngIf="notLiked(article._id); else liked">
+        <button mat-mini-fab disabled aria-label="Example icon button with a home icon">
+          <mat-icon (click)="likeArticle(article._id, '+')" aria-hidden="false" aria-label="Like article">
+            favorite
+          </mat-icon>
+        </button>
+      </div>
+      <ng-template #liked>
+        <button mat-mini-fab disabled aria-label="Example icon button with a home icon">
+          <mat-icon  (click)="likeArticle(article._id, '-')" aria-hidden="false" color="warn" aria-label="Remove like">
+            favorite
+          </mat-icon>
+        </button>
+      </ng-template>
+    </div>
+      <!--Comments component-->
+      <app-comments [articleId]="article._id" [authorName]="article.author.name"></app-comments>
+    </div>
+  </div>
+  <ng-template #showLoading>
+    <mat-spinner class="loading"></mat-spinner>
+  </ng-template>

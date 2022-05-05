@@ -1,0 +1,21 @@
+<div *ngIf="notifications !== undefined && notifications.length > itemsPerPage">
+  <pagination-controls class="d-block mt-5 m-auto d-flex justify-content-center" (pageChange)="p = $event"></pagination-controls>
+</div>
+<div *ngFor="let notification of notifications | paginate: { itemsPerPage: itemsPerPage, currentPage: p}">
+    <mat-card class="mat-card mat-focus-indicator w-90 mb-5 mt-5 col-md-10 m-auto pb-4 pt-4">
+      <div *ngIf="notification.title == 'Someone commented on your article' else showLikeIcon">
+        <mat-icon class="mb-3" color="primary">comment</mat-icon>
+      </div>
+      <ng-template #showLikeIcon>
+        <mat-icon color="warn" class="mb-3">favorite</mat-icon>
+      </ng-template>
+      <mat-card-title>{{notification.title}}</mat-card-title>
+      <mat-card-subtitle> {{notification.date | transformDate}}, {{notification.date | transformTime}}</mat-card-subtitle>
+      <mat-card-content>
+        <div  [innerHTML]="notification.message | bypassSecurity" routerTransformer class="message"></div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div *ngIf="notifications !== undefined && notifications.length > itemsPerPage">
+    <pagination-controls class="d-block mt-5 m-auto d-flex justify-content-center" (pageChange)="p = $event"></pagination-controls>
+  </div>

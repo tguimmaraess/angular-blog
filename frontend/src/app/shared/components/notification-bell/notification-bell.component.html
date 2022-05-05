@@ -1,0 +1,8 @@
+<!--Notification bell-->
+<button mat-button routerLink="admin/notifications" (click)="updateNumberOfUnseenNotifications()">
+  <mat-icon aria-hidden="false" aria-label="Notifications">notifications</mat-icon>
+  <span matBadge="{{notificationCount}}" matBadgeColor="accent" [matBadgeHidden]="badgeHidden" matBadgeOverlap="false"></span>
+</button>
+<audio #notificationSound>
+  <source src="./assets/sounds/notification.mp3" type="audio/mp3">
+</audio>

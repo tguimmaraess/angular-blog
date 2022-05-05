@@ -1,0 +1,37 @@
+.signin{
+  background: #ebebeb;
+  width: 50%;
+  height: 300px;
+  margin: auto
+}
+
+.signin-input {
+  width: 350px
+}
+
+@media screen and (max-width: 768px) {
+  .signin{
+    width: 70%
+  }
+
+  .signin-input {
+    width: 300px
+  }
+}
+
+
+@media screen and (max-width: 468px) {
+  .signin{
+    width: 80%
+  }
+
+  .signin-input {
+    width: 100%
+  }
+}
+
+.form-actions{
+  display: block;
+  margin-top: 13px;
+  line-height: 53px;
+}

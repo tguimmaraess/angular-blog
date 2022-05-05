@@ -1,0 +1,57 @@
+.article-information {
+  margin-top: 23px;
+  display: flex;
+  align-items: center;
+}
+
+.article-information mat-icon {
+  margin-left: 13px;
+}
+
+.thumbnail-container {
+  margin: auto;
+  width: 100%;
+  display: block;
+  margin-top: 33px;
+}
+
+.thumbnail {
+  max-height: 320px;
+  width: 93%;
+  object-fit: cover;
+  margin: auto;
+  display: block;
+}
+
+.loading {
+  margin: auto;
+  display: block;
+  margin-top: 100px;
+}
+
+h1 {
+  margin-top: 30px;
+  word-break: break-word;
+}
+
+
+.article {
+  margin-top: 50px;
+  word-break: break-word;
+}
+
+.like-button {
+  width: 40px;
+  display: block;
+  margin: auto;
+  margin-top: 53px;
+}
+
+.like-button .mat-icon {
+  cursor: pointer;
+  margin: auto;
+}
+
+.edit-button {
+  cursor: pointer;
+}

@@ -1,0 +1,40 @@
+.loading {
+  margin: auto;
+  display: block;
+  margin-top: 100px;
+}
+
+.edit-article{
+  width: 100%;
+  margin: auto;
+}
+
+.edit-article-input {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .edit-article{
+    width: 70%
+  }
+
+  .edit-article-input {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 468px) {
+  .edit-article{
+    width: 85%
+  }
+
+  .edit-article-input {
+    width: 100%
+  }
+}
+
+.form-actions{
+  display: block;
+  margin-top: 13px;
+  line-height: 53px;
+}

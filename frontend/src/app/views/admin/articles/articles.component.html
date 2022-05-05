@@ -1,0 +1,68 @@
+<div class="container">
+  <!--Article buttons-->
+  <div class="buttons">
+    <button mat-raised-button color="primary" routerLink="../create-article">
+      <mat-icon aria-hidden="false" aria-label="Add new article">add</mat-icon>
+      Add Article
+    </button>
+  </div>
+    <!--If ok is true, shows articles, else shows loading image -->
+    <div class="col-lg-12 d-block mb-5" *ngIf="ok else showLoading">
+      <div *ngIf="articles.length > 0; else showNoArticlesMessage" class="row">
+      <!--Pagination buttons-->
+       <div *ngIf="articles.length > itemsPerPage">
+         <pagination-controls class="d-block mt-5 m-auto d-flex justify-content-center" (pageChange)="p = $event"></pagination-controls>
+       </div>
+      <!--Cards-->
+      <div class="d-flex d-wrap ml-5 cards">
+        <div *ngFor="let article of articles | paginate: { itemsPerPage: itemsPerPage, currentPage: p}">
+          <mat-card class="col col-sm-6 card mt-5 mb-5" #articleIdRef>
+            <mat-card-header>
+              <mat-card-title [innerHTML]="article.title | limitText: 50"></mat-card-title>
+            </mat-card-header>
+            <div *ngIf="article.thumbnail!==null && article.thumbnail!==''; else noImage">
+              <img mat-card-image class="mt-4 mb-3" [src]="article.thumbnail" alt="Thumbnail {{article.title}}">
+            </div>
+          <ng-template #noImage>
+            <img mat-card-image src="/assets/images/no-photo-available.png" alt="No thumbnail">
+          </ng-template>
+          <mat-card-content>
+            <!--Pipe to limit post text to 100-->
+            <div [innerHTML]="article.post | limitText: 100">
+            </div>
+            <!--Shows read more link if length is more than 100-->
+            <div *ngIf="article.post.length > 100">
+              <a routerLink="../../article/{{article._id}}">Go to article</a>
+            </div>
+            <p>Posted on {{article.date | transformDate}} at {{article.date | transformTime}}</p>
+          </mat-card-content>
+          <!--Delete and edit buttons-->
+          <mat-card-actions>
+            <button [routerLink]="['/admin/edit-article', article._id]" mat-raised-button color="primary">
+              <mat-icon [attr.data-id]="article._id" aria-hidden="false" aria-label="Edit article">
+                edit
+              </mat-icon>
+              Edit
+            </button>
+            <button  (click)="deleteArticle(article._id, $event)" mat-button color="warn">
+              <mat-icon (click)="deleteArticle(article._id, $event)" aria-hidden="false" aria-label="Delete article">
+                delete
+              </mat-icon>
+            Delete
+            </button>
+          </mat-card-actions>
+        </mat-card>
+        </div>
+      </div>
+    <!--Pagination buttons-->
+    <div *ngIf="articles.length > itemsPerPage">
+      <pagination-controls class="d-block mt-5 m-auto d-flex justify-content-center" (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>
+  <ng-template #showNoArticlesMessage>
+    <h1 align="center" style="margin-top: 13px">You don't have any articles</h1>
+  </ng-template>
+</div>
+<ng-template #showLoading>
+  <mat-spinner class="loading"></mat-spinner>
+</ng-template>

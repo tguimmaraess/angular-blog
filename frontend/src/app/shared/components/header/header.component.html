@@ -1,0 +1,23 @@
+<div class="header-content">
+  <p class="col-sm mt-3" style="margin-left: 7px;">Hello {{userName}}</p>
+  <!--Notifications-->
+  <app-notification-bell></app-notification-bell>
+  <!--User actions dropdown-->
+  <button mat-button [matMenuTriggerFor]="menu">
+    <mat-icon aria-hidden="false" aria-label="User Actions">person</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="./">
+      <mat-icon aria-hidden="false" aria-label="Visit site">home</mat-icon>
+      Visit site
+    </button>
+    <button mat-menu-item routerLink="admin/settings">
+      <mat-icon aria-hidden="false" aria-label="Settings">settings</mat-icon>
+      Settings
+    </button>
+    <button mat-menu-item (click)="signOut()">
+      <mat-icon aria-hidden="false" aria-label="Sign out">logout</mat-icon>
+      Sign Out
+    </button>
+  </mat-menu>
+</div>

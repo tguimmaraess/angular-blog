@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>You are about to <b style="color: red">delete</b> your account</h1>
+<div mat-dialog-content>
+ <h2>To delete your account insert your password</h2>
+ <form #confirmAccountDeletion="ngForm" (ngSubmit)="deleteAccount(confirmAccountDeletion.value)">
+   <mat-form-field appearance="fill">
+     <mat-label>Your password</mat-label>
+     <input matInput required minlength="6"  ngModel
+      #confirmationPassword="ngModel" type="password" name="confirmationPassword">
+   </mat-form-field>
+   <div class="mb-3" *ngIf="confirmationPassword.touched">
+     <mat-error *ngIf="confirmationPassword.errors?.minlength">
+       Confirmation password has to be at least <strong>6</strong> characters
+     </mat-error>
+     <mat-error *ngIf="confirmationPassword.errors?.required">
+       Confirmation password is <strong>required</strong>
+     </mat-error>
+   </div>
+
+   <p>Also type <b>"YES"</b> below to confirm deletion. This will delete your account and all your posts, comments and likes.</p>
+   <mat-form-field appearance="fill">
+     <mat-label>Type "YES"</mat-label>
+     <input matInput
+     ngModel
+     #confirmationMessage="ngModel"
+     pattern="^(yes|YES)$"
+     required
+     name="confirmationMessage"
+    type="text">
+   </mat-form-field>
+
+   <div *ngIf="confirmationMessage.touched">
+     <mat-error *ngIf="confirmationMessage.errors?.pattern">
+       Confirmation message must be <strong>YES or yes</strong>
+     </mat-error>
+     <mat-error *ngIf="confirmationMessage.errors?.required">
+       Confirmation message is <strong>required</strong>
+     </mat-error>
+   </div>
+
+   <div mat-dialog-actions>
+    <button mat-button type="button" (click)="onNoClick()">No Thanks</button>
+    <button  mat-button cdkFocusInitial [disabled]="confirmAccountDeletion.invalid" mat-raised-button color="warn">Delete account</button>
+   </div>
+
+  </form>
+  </div>

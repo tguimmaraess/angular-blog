@@ -1,0 +1,49 @@
+<!-- If ok is true, shows articles, else shows loading image -->
+<div class="mt-5" *ngIf="ok; else showLoading">
+  <!--Pagination buttons-->
+   <div *ngIf="articles.length > itemsPerPage">
+     <pagination-controls class="d-block mt-5 m-auto d-flex justify-content-center" (pageChange)="p = $event"></pagination-controls>
+   </div>
+   <div *ngFor="let article of articles | paginate: { itemsPerPage: itemsPerPage, currentPage: p}">
+    <mat-card class="mt-5 mb-5" id="{{article._id}}">
+      <!--Thumbnail-->
+      <div *ngIf="article.thumbnail!==null && article.thumbnail!==''; else noImage">
+        <img mat-card-image [src]="article.thumbnail" alt="Thumbnail {{article.title}}">
+      </div>
+    <ng-template #noImage>
+      <img mat-card-image src="/assets/images/no-photo-available.png" alt="No thumbnail">
+    </ng-template> 
+    <!--Title-->
+      <mat-card-title>{{article.title}}</mat-card-title>
+      <!--Post date-->
+      <mat-card-subtitle>Posted on {{article.date | transformDate}}</mat-card-subtitle>
+      <!-- Checks if article has like or not and shows the buttons accordingly -->
+      <mat-card-actions>
+        <div *ngIf="notLiked(article._id); else liked">
+          <button mat-icon-button (click)="likeArticle(article._id, '+')">
+            <mat-icon aria-hidden="false" aria-label="Like article">
+              favorite
+            </mat-icon>
+          </button>
+        </div>
+        <ng-template #liked>
+          <button mat-icon-button (click)="likeArticle(article._id, '-')">
+            <mat-icon aria-hidden="false" color="warn" aria-label="Remove like">
+              favorite
+            </mat-icon>
+          </button>
+        </ng-template>
+      </mat-card-actions>
+        <button mat-raised-button color="primary" [routerLink]="['article/', article._id]">
+          See article
+        </button>
+    </mat-card>
+  </div>
+  <!--Pagination buttons-->
+   <div *ngIf="articles.length > itemsPerPage">
+     <pagination-controls class="d-block mt-5 mb-5 d-flex justify-content-center" (pageChange)="p = $event"></pagination-controls>
+   </div>
+</div>
+<ng-template #showLoading>
+  <mat-spinner class="loading"></mat-spinner>
+</ng-template>
