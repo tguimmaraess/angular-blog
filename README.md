@@ -4,11 +4,11 @@
 
 Fully featured Blog using Angular 13 and Node.js + MongoDB
 
-This is an example project that you can learn from, extendend, adapt to suit your needs.
+This is an real world example app project that you can learn from, extendend and adapt to suit your needs.
 
 ## This project includes:
 
-1 -  Real time notifications with Comet approach however doesn't add any extra overhead to the application/server or latency, since it uses MongoDB Atlas which is cloud-based and it also takes adavantage of `db watch`, which is a function that notifies whenver a particular document has changed, you may define your own filters.
+1 -  Real time notifications with Comet approach however doesn't add any extra overhead to the application/server or latency, since it uses MongoDB Atlas which is cloud-based and it also takes adavantage of `db watch`, which is a function that notifies the bckend whenever a particular document has changed, you may define your own filters.
 
 2 - Ckeditor WYIWYG Editor.
 
