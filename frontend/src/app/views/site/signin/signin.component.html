@@ -22,8 +22,7 @@
           <div class="col-lg-6">
             <mat-form-field class="signin-input" appearance="fill">
               <mat-label><mat-icon>password</mat-icon> Password</mat-label>
-              <input type="password"  formControlName="password" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher"
-                     placeholder="Ex. pat@example.com">
+              <input type="password"  formControlName="password" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher">
               <mat-hint>Min 6 characteres</mat-hint>
               <mat-error *ngIf="passwordFormControl.hasError('email') && !passwordFormControl.hasError('required')">
                 Please enter a valid email address
