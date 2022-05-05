@@ -1,10 +1,10 @@
-/*
-* @param   {string} resource     - Resource/endpoint (URL to be accessed) for post, put get and delete request.
-* @param   {Object} parameters   - Parameters for post, put and delete request
-* @param   {Object} [parameters] - Parameters for get request.
-* @param   {Object} [headers]    - Headers
-* @returns {Observable<T>}       - Observable containing the http response as well as the methods from Observable class
-*/
+/**
+ * @param   {string} resource     - Resource/endpoint (URL to be accessed) for post, put get and delete request.
+ * @param   {Object} parameters   - Parameters for post, put and delete request
+ * @param   {Object} [parameters] - Parameters for get request.
+ * @param   {Object} [headers]    - Headers
+ * @returns {Observable<T>}       - Observable containing the http response as well as the methods from Observable class
+ */
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'; //Http classes provided by Angular
 import { Observable, throwError, timer } from 'rxjs'; //Observable and throwError methods from rxjs
