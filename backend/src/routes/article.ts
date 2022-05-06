@@ -32,17 +32,17 @@ router.post("/create-article", validateArticle, verify.authenticateUser, article
 router.post("/edit-article", validateArticle, verify.authenticateUser, article.editArticle);
 
 /**
-* @get
-* /get-articles/:id
-* Get all user articles route by the author id
-*/
+ * @get
+ * /get-articles/:id
+ * Get all user articles route by the author id
+ */
 router.get("/get-articles/:id", verify.authenticateUser, article.getArticles);
 
 /**
-* @get
-* delete-article/:articleId/
-* Delete article by article id route
-*/
+ * @get
+ * delete-article/:articleId/
+ * Delete article by article id route
+ */
 router.get("/delete-article/:articleId", verify.authenticateUser, article.deleteArticle);
 
 /**
