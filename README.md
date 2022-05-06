@@ -2,9 +2,9 @@
 
 ## Project made with Angular 13
 
-Fully featured Blog using Angular 13 + Angular material and Node.js + MongoDB in the backend
+Fully-featured Blog using Angular 13 + Angular material and Node.js + MongoDB in the backend
 
-This is an real world example app project that you can learn from, extendend and adapt to suit your needs.
+This is a real world example app project that you can learn from, extendend and adapt to suit your needs.
 
 ## This project includes:
 
