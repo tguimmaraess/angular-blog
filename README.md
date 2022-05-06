@@ -29,4 +29,4 @@ Live working project here: https://blog-ang.herokuapp.com/
 
 You can create an account if you want to just to test it out and delete it anytime!
 
-It was a vey fun project to made and very chanlleging as well, since the documentation on Angular Universal was oudated and no one had an answer on how to use third-party libraries with Angular Universal (SSR - Server Side Rendering) since it's required to deploy applications and window object doesn't exist on server side. But I did manage to find a way.
+It was a vey fun project to make and very chanlleging as well, since the documentation on Angular Universal was oudated and no one had an answer on how to use third-party libraries with Angular Universal (SSR - Server Side Rendering) since it's required to deploy applications and window object doesn't exist on server side. But I did manage to find a way.
