@@ -1,0 +1,21 @@
+:host {
+  margin-top: 11px;
+}
+
+.mat-badge-medium.mat-badge-after .mat-badge-content {
+  right: auto;
+}
+
+.new-notifications-container {
+  background-color: #ff000014;
+}
+
+.new-notification {
+  display: block;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.new-notification p {
+  font-size: 14px;
+}

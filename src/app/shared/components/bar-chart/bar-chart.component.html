@@ -1,0 +1,14 @@
+<div *ngIf="ok; else showLoading">
+  <!--Bar Chart-->
+  <div class="overflow-hidden">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+      [title]="chartOptions.title"
+    ></apx-chart>
+  </div>
+</div>
+<ng-template #showLoading>
+  <mat-spinner class="loading"></mat-spinner>
+</ng-template>
