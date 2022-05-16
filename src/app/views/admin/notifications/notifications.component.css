@@ -1,0 +1,10 @@
+.loading {
+  margin: auto;
+  display: block;
+  margin-top: 100px;
+}
+
+
+.message {
+  word-break: break-word;
+}

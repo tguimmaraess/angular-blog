@@ -1,0 +1,14 @@
+<!-- Site navigation items -->
+<mat-nav-list class="top-nav">
+  <a mat-list-item routerLink="/">Articles</a>
+  <div *ngIf="signedIn; else notSignedIn">
+    <button mat-button routerLink="admin/panel">
+      <mat-icon aria-hidden="false" aria-label="Sigin">person</mat-icon>
+    </button>
+  </div>
+  <ng-template #notSignedIn>
+    <button mat-button routerLink="signin">
+      <mat-icon aria-hidden="false" aria-label="Sigin">person</mat-icon>
+    </button>
+  </ng-template>
+</mat-nav-list>

@@ -1,0 +1,96 @@
+<!--Comment form-->
+<form class="comment-form mb-5 mt-5" [formGroup]="commentForm" (ngSubmit)="doAddComment(commentForm.value)">
+  <!--Title of the comment-->
+  <div class="col-md-6 mt-1">
+    <mat-form-field class="comment-input mb-4"  appearance="fill">
+      <mat-label>Title</mat-label>
+      <input class="comment-input" type="text" formControlName="title" matInput [formControl]="titleFormControl" placeholder="Nice article">
+      <mat-hint>Title</mat-hint>
+      <mat-error *ngIf="titleFormControl.hasError('minlength') && !titleFormControl.hasError('required')">
+        Title has to be at least <strong>10 characteres</strong>
+      </mat-error>
+      <mat-error *ngIf="titleFormControl.hasError('required')">
+        Title is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <!--Name (optional)-->
+  <div class="col-md-6  mt-1">
+    <mat-form-field class="comment-input mb-4" appearance="fill">
+      <mat-label>Name</mat-label>
+      <input type="text" formControlName="name" matInput [formControl]="nameFormControl" placeholder="Jhon Doe">
+      <mat-hint>Your name</mat-hint>
+      <mat-error *ngIf="titleFormControl.hasError('minlength') && !titleFormControl.hasError('required')">
+      </mat-error>
+      <mat-error *ngIf="titleFormControl.hasError('required')">
+        Name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <!--Email (optional)-->
+  <div class="col-md-6  mt-1">
+    <mat-form-field class="comment-input mb-4" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input type="email" formControlName="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
+      <mat-hint>Your email</mat-hint>
+      <mat-error *ngIf="emailFormControl.hasError('email')">
+        Please enter a valid email address
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <!--Comment-->
+  <div class="col-md-6 mt-1">
+    <mat-form-field class="comment-input" appearance="fill">
+      <mat-label>Leave a comment</mat-label>
+      <textarea formControlName="comment" matInput placeholder="Ex. Amazing article by {{authorName}}..."></textarea>
+      <mat-hint>Write your comment</mat-hint>
+    </mat-form-field>
+    <mat-error *ngIf="commentFormControl.hasError('comment')">
+      Please write a comment
+    </mat-error>
+  </div>
+  <!--Add comment-->
+  <button class="mt-3" mat-flat-button color="primary">Add comment</button>
+</form>
+
+<!--Checks if we have any comments or new comments-->
+<div *ngIf="comments.length >= 1 || newComment.title != null; else noComments">
+  <!--Checks if comments are ready, if not, shows loading-->
+  <div *ngIf="ok; else showLoading">
+    <!--Pagination buttons-->
+    <div *ngIf="comments !== undefined && comments.length > itemsPerPage">
+      <pagination-controls class="d-block mt-5 m-auto d-flex justify-content-center" (pageChange)="p = $event"></pagination-controls>
+    </div>
+    <!--New added comment-->
+    <div *ngIf="newComment.title != null">
+      <mat-card class="mt-5 mb-5 col-md-4 comments">
+        <mat-card-title class="title">{{newComment.title}}</mat-card-title>
+        <mat-card-subtitle [style.marginTop.px]="20">{{newComment.name || 'Anonymous'}} said:</mat-card-subtitle>
+        <mat-card-content>{{newComment.comment}}</mat-card-content>
+        <p>{{newComment.date | transformDate}}</p>
+      </mat-card>
+    </div>
+    <!--All comments-->
+    <div class="all-comments row">
+      <div *ngFor="let comment of comments | paginate: { itemsPerPage: 3, currentPage: p }">
+        <mat-card class="mt-5 mb-5 col-md-4 comments">
+          <mat-card-title class="title">{{comment.title}}</mat-card-title>
+          <mat-card-subtitle [style.marginTop.px]="20">{{comment.name || 'Anonymous'}} said:</mat-card-subtitle>
+          <mat-card-content>{{comment.comment}}</mat-card-content>
+          <p>{{comment.date | transformDate}}</p>
+        </mat-card>
+      </div>
+    </div>
+    <!--Pagination buttons-->
+    <div *ngIf="comments !== undefined && comments.length > itemsPerPage">
+     <pagination-controls class="d-block mt-5 m-auto d-flex justify-content-center" (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>
+  <ng-template #showLoading>
+    <mat-spinner class="loading"></mat-spinner>
+  </ng-template>
+</div>
+<!--If no comments were found-->
+<ng-template #noComments>
+  <h2 class="mb-5 h2 pb-4">This article doesn't have any comments yet. Be the first to comment!</h2>
+</ng-template>

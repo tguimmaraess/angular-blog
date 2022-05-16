@@ -1,0 +1,47 @@
+.loading {
+  margin: auto;
+  display: block;
+  margin-top: 100px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: auto;
+}
+
+.cards > div {
+  margin: 12px;
+}
+
+@media screen and (min-width: 600px) {
+  mat-card{
+    margin-top: 33px;
+    width: 250px;
+  }
+}
+
+.mat-card-content {
+  word-break: break-all;
+}
+
+.mat-card-header {
+    word-break: break-all;
+}
+
+@media screen and (max-width: 600px) {
+  mat-card {
+    margin-top: 33px;
+    width: 100%;
+  }
+  mat-sidenav-content {
+    padding-left:0px !important;
+  }
+}

@@ -1,0 +1,65 @@
+<!--General Info-->
+  <div class="col-sm-10 m-auto row d-flex justify-content-between w-90">
+    <mat-card class="col-sm-3 mb-3 mt-3 panel-general-information">
+      <mat-card-content>
+        <mat-card-title class="mb-3 mt-4 m-auto d-flex justify-content-center">Articles Posted</mat-card-title>
+        <mat-icon color="accent" class="mb-5 mt-1 m-auto d-flex justify-content-center" [style.FontSize.px]="63">article</mat-icon>
+        <mat-card-subtitle [style.FontSize.px]="63" class="mb-4 mt-4 m-auto d-flex justify-content-center">
+          {{panelInformation.countPosts[0].totalPosts}}
+        </mat-card-subtitle>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="col-sm-3 mb-3 mt-3 ml-3 panel-general-information">
+      <mat-card-content>
+        <mat-card-title class="mb-3 mt-4 m-auto d-flex justify-content-center">Total likes</mat-card-title>
+        <mat-icon color="warn" class="mb-5 mt-1 m-auto d-flex justify-content-center" [style.FontSize.px]="63">favorite</mat-icon>
+        <mat-card-subtitle [style.FontSize.px]="63" class="mb-4 mt-5 m-auto d-flex justify-content-center">
+          {{panelInformation.countLikes[0].totalLikes}}
+        </mat-card-subtitle>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="col-sm-3 mb-3 mt-3 ml-3 panel-general-information">
+      <mat-card-content>
+        <mat-card-title class="mb-3 mt-4 m-auto d-flex justify-content-center">Total comments</mat-card-title>
+        <mat-icon color="primary" class="mb-5 mt-1 m-auto d-flex justify-content-center" [style.FontSize.px]="63">comment</mat-icon>
+        <mat-card-subtitle [style.FontSize.px]="63" class="mb-4 mt-4 m-auto d-flex justify-content-center">
+          {{panelInformation.countComments[0].totalComments}}
+        </mat-card-subtitle>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <!--Bar Chart-->
+  <mat-card class="col-sm-10 m-auto w-90 d-block mb-5">
+    <div class="container">
+      <app-bar-chart [id]="userId" [chartTitle]="barChartTitle" [seriesName]="barChartSeriesName"></app-bar-chart>
+    </div>
+  </mat-card>
+  <!--Pie chard and most and least popular articles-->
+  <div class="col-sm-10 row m-auto row w-90 mb-5">
+    <mat-card class="d-flex mb-5 flex-wrap justify-content-around">
+      <!--Checks if pie chart data-->
+      <div *ngIf="showPieChartData; else showNoData">
+        <!--Pie Chart-->
+        <app-pie-chart [labels]="pieChartLabels" [data]="pieChartData"></app-pie-chart>
+      </div>
+      <ng-template #showNoData>
+        <p>No data</p>
+      </ng-template>
+      <!--Checks if articles have any visits-->
+      <div class="mt-5" *ngIf="showMaxMinVisitsData; else showNoData">
+        <!--Article visits max-->
+        <div>
+          <h3><mat-icon style="color: green">arrow_upward</mat-icon><b>Article with most visits:</b></h3>
+          <p><a [routerLink]="['../../article', panelInformation.getArticleWithMostVisits[0]._id]">{{panelInformation.getArticleWithMostVisits[0].title}}</a> ({{panelInformation.getArticleWithMostVisits[0].visitsMax}} visits)</p>
+        </div>
+        <!--Article visits min-->
+        <div>
+          <h3><mat-icon style="color: red">arrow_downward</mat-icon><b>Article with the least visits:</b></h3>
+          <p><a [routerLink]="['../../article', panelInformation.getArticleWithLeastVisits[0]._id]">{{panelInformation.getArticleWithLeastVisits[0].title}}</a> ({{panelInformation.getArticleWithLeastVisits[0].visitsMin}} visits)</p>
+        </div>
+      </div>
+      <ng-template #showNoData>
+        <p>No data</p>
+      </ng-template>
+    </mat-card>
+  </div>

@@ -1,0 +1,35 @@
+.create-article{
+  width: 100%;
+  margin: auto;
+}
+
+.create-article-input {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .create-article{
+    width: 70%
+  }
+
+  .create-article-input {
+    width: 300px
+  }
+}
+
+
+@media screen and (max-width: 468px) {
+  .create-article{
+    width: 93%
+  }
+
+  .create-article-input {
+    width: 100%
+  }
+}
+
+.form-actions{
+  display: block;
+  margin-top: 13px;
+  line-height: 53px;
+}
