@@ -40,7 +40,7 @@ export class HttpService<T> {
     );
   }
 
-  //Update an entity using Puts methods and returns an Observable
+  //Updates an entity using Puts methods and returns an Observable
   public updade(resource: string, parameters: any, headers?: Object): Observable<T> {
     return this.httpClient.put<T>(this._baseUrl +  resource, parameters, headers)
     .pipe(
@@ -68,7 +68,7 @@ export class HttpService<T> {
     );
   }
 
-  //Delete request to the API and returns an Observable
+  //Deletes request to the API and returns an Observable
   public delete(resource: string, parameters?: any)  {
     return this.httpClient.delete<T>(this._baseUrl + resource, parameters)
     .pipe(
@@ -77,7 +77,7 @@ export class HttpService<T> {
     );
   }
 
-  //Retries when this condition is met, if we don't do this, it will retry the request for every error
+  //Retrives when this condition is met, if we don't do this, it will retry the request for every error
   private intrernetOrServerFailed(): any {
     const allowedStatusText = ['Unknown Error']; //Const with statusTexts we will retry (could also be status code)
     return ((attempts: Observable<any>) => { //Retunrs function with Observable type any
